@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :image_url
       t.string :url
       t.string :token
+      t.string :refresh_token
       t.string :secret
 
       t.timestamps null: false
