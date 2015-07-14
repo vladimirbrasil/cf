@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: oauth_development
+  pool: 5
+
+test: &TEST
+  adapter: postgresql
+  encoding: utf8
+  database: oauth_test
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: oauth_production
+  username: 
+  password:
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+
+cucumber:
+  <<: *TEST
