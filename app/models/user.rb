@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
       user.url = auth_hash['info']['urls'][user.provider.capitalize]
       user.token = auth_hash['credentials']['token']
       user.refresh_token ||= auth_hash['credentials']['refresh_token'] #is sent only in the first access (consent page)
+      user.expires_at = Time.at( auth_hash['credentials']['expires_at'] ).to_datetime
       user.secret = auth_hash['credentials']['secret']
       user.save!
       user

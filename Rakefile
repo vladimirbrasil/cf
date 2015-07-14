@@ -1,10 +1,12 @@
 # http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
+
 =begin
   Done << Adicionar token 
   Fazer funcionar token_refresh.
   Done << Adicionar email como index em user
   Pode adicionar providers para o mesmo User
     http://code.tutsplus.com/articles/how-to-use-omniauth-to-authenticate-your-users--net-22094
+    http://davidlesches.com/blog/clean-oauth-for-rails-an-object-oriented-approach
 
   Adicionar novo login social:
   1. Adiciona gem (Bundle install)
