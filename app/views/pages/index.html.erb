@@ -4,17 +4,24 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-body">
-      <ul>
-        <li><strong>Name:</strong> <%= current_user.name %></li>
-        <li><strong>Provider:</strong> <%= current_user.provider %></li>
-        <li><strong>uID:</strong> <%= current_user.uid %></li>
-        <li><strong>Location:</strong> <%= current_user.location %></li>
-        <li><strong>Avatar URL:</strong> <%= current_user.image_url %></li>
-        <li><strong>URL:</strong> <%= current_user.url %></li>
-        <li><strong>Token:</strong> <%= current_user.token[0,5] %>...</li>
-        <li><strong>Refresh Token:</strong> <%= current_user.refresh_token[0,5] %>...</li>
-        <li><strong>Expires at:</strong> <%= current_user.expires_at %></li>
-      </ul>
+        <p><strong>First Name:</strong> <%= current_user.first_name %></p>
+        <p><strong>Last Name:</strong> <%= current_user.last_name %></p>
+        <p><strong>Email:</strong> <%= current_user.email %></p>
+
+        <% current_user.accounts.each do |account| %>
+          <h3><strong>Provider:</strong> <%= account.provider %></h3>
+          <ul>
+            <li><strong>uID:</strong> <%= account.uid %></li>
+            <li><strong>Location:</strong> <%= account.location %></li>
+            <li><strong>Avatar URL:</strong> <%= account.image_url %></li>
+            <li><strong>URL:</strong> <%= account.url %></li>
+            <li><strong>Token:</strong> <%= account.oauth_token[0,5] %>...</li>
+            <li><strong>Refresh Token:</strong> <%# account.oauth_refresh_token[0,5] %>...</li>
+            <li><strong>Secret:</strong> <%# account.oauth_secret[0,5] %>...</li>
+            <li><strong>Expires at:</strong> <%= account.oauth_expires %></li>
+          </ul>
+        <% end %>
+
     </div>
   </div>
 <% else %>

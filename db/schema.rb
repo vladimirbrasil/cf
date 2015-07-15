@@ -11,27 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714050544) do
+ActiveRecord::Schema.define(version: 20150714221342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email",         null: false
-    t.string   "provider",      null: false
-    t.string   "uid",           null: false
-    t.string   "name"
+  create_table "accounts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "uid",                 null: false
+    t.string   "provider",            null: false
+    t.string   "username"
     t.string   "location"
     t.string   "image_url"
     t.string   "url"
-    t.string   "token"
-    t.string   "refresh_token"
-    t.string   "secret"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.datetime "expires_at"
+    t.string   "oauth_token"
+    t.string   "oauth_refresh_token"
+    t.string   "oauth_secret"
+    t.datetime "oauth_expires"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "expires_at"
+  end
 
 end

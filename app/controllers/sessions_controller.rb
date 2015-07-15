@@ -1,3 +1,4 @@
+=begin
 class SessionsController < ApplicationController
   def create
     begin
@@ -10,6 +11,34 @@ class SessionsController < ApplicationController
       flash[:warning] = "There was an error while trying to authenticate you..."
     end
     redirect_to root_path
+  end
+end
+=end
+
+
+class SessionsController < ApplicationController
+
+  def new
+  end
+
+  def create
+    # flash[:success] = request.env['omniauth.auth']
+
+
+    # # begin
+      oauth = OAuthUser.new(request.env["omniauth.auth"], current_user)
+      oauth.login_or_create
+
+      @account = oauth.account
+      @user = @account.user
+      session[:user_id] = oauth.user.id
+      flash[:success] = "Welcome, #{@user.name}!"
+    # # rescue
+    #   # flash[:warning] = "There was an error while trying to authenticate you..."
+    # # end
+    redirect_to root_path
+
+
   end
 
   def destroy
@@ -25,4 +54,3 @@ class SessionsController < ApplicationController
   end
 
 end
-
