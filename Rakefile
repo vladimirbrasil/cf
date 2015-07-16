@@ -7,6 +7,21 @@
   Pode adicionar providers para o mesmo User
     http://code.tutsplus.com/articles/how-to-use-omniauth-to-authenticate-your-users--net-22094
     http://davidlesches.com/blog/clean-oauth-for-rails-an-object-oriented-approach
+  Refactor
+    http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/
+    Extract Value Objects
+      expired? Token expiration equalities...?
+    Extract Service Objects
+      authenticating with an access token
+        ex: pull a User#authenticate method out into a UserAuthenticator
+      posting to social networks | updating contacts in google (external sources)
+      action reaches multiple models an e-commerce purchase using Order, CreditCard and Customer objects
+      complex actions closing books after accounting period
+    Extract Form Objects
+    Extract Query Objects
+    Introduce View Objects
+    Extract Policy Objects
+    Extract Decorators
 
   Adicionar novo login social:
   1. Adiciona gem (Bundle install)
