@@ -1,0 +1,40 @@
+$background_color: rgb(112,0,0); /*#204d74;*/
+
+body {
+  margin: 0;
+  font-weight: 500;
+  font-family: 'Roboto Slab', serif; 
+}
+
+section {
+  width: 100%;
+  padding: 0 0;
+  display: table;
+  margin: 0;
+  max-width: none;
+  background-color: #373B44;
+  height: 100vh; 
+}
+
+section:nth-of-type(2n) {
+  background-color: $background_color; 
+}
+
+.intro {
+  height: 100vh; 
+  text-align: center;
+}
+
+.content {
+  display: table-cell;
+  vertical-align: middle; 
+  text-align: center;
+}
+
+// Mensagens de erro
+.alert
+{
+    list-style-type: none;
+    padding: 20px 0 0 0; 
+    margin:0;
+}

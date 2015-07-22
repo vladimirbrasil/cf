@@ -1,4 +1,5 @@
-class LinkedinPolicy
+class OAuthPolicy::Facebook < OAuthPolicy::Base
+  extend ActiveSupport::Concern
 
   def initialize auth
     @auth = auth
@@ -17,11 +18,11 @@ class LinkedinPolicy
   end
 
   def username
-    @auth.info.urls.public_profile
+    @auth.info.nickname
   end
 
   def image_url
-    @auth.info.image
+    "http://graph.facebook.com/#{auth.info.nickname}/picture?type=large"
   end
 
   def uid
@@ -33,19 +34,19 @@ class LinkedinPolicy
   end
 
   def oauth_expires
-    nil
+    Time.at(@auth.credentials.expires_at)
   end
 
   def oauth_secret
-    @auth.credentials.secret
+    nil
   end
 
   def create_callback account
-    # Place any methods you want to trigger on LinkedIn OAuth creation here.
+    # Place any methods you want to trigger on Facebook OAuth creation here.
   end
 
   def refresh_callback account
-    # Place any methods you want to trigger on LinkedIn OAuth creation here.
+    # Place any methods you want to trigger on subsequent Facebook OAuth logins here.
   end
 
 end

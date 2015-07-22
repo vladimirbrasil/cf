@@ -1,52 +1,52 @@
-=begin
-class SessionsController < ApplicationController
-  def create
-    begin
-      # flash[:success] = request.env['omniauth.auth']
-      @user = User.from_omniauth(request.env['omniauth.auth'])
-
-      session[:user_id] = @user.id
-      flash[:success] = "Welcome, #{@user.name}!"
-    rescue
-      flash[:warning] = "There was an error while trying to authenticate you..."
-    end
-    redirect_to root_path
-  end
-end
-=end
-
-
 class SessionsController < ApplicationController
 
   def new
   end
 
   def create
-    # flash[:success] = request.env['omniauth.auth']
+    # raise auth_hash.to_yaml
+    oauthuser = User::OAuthUser.new(auth_hash)
+    
+    user = oauthuser.first_or_create
 
-
-    # # begin
-      oauth = OAuthUser.new(request.env["omniauth.auth"], current_user)
-      oauth.login_or_create
-
-      @account = oauth.account
-      @user = @account.user
-      session[:user_id] = oauth.user.id
-      flash[:success] = "Welcome, #{@user.name}!"
-    # # rescue
-    #   # flash[:warning] = "There was an error while trying to authenticate you..."
-    # # end
+    if user.valid?
+      session[:user_id] = user.id
+      flash[:success] = "Bem vindo, #{user.name}!"
+    else
+      flash[:error] = user.errors.full_messages.join(' | ')
+      # flash[:warning] = "Houve um erro ao tentar autenticá-lo... #{params[:message]}"
+      # redirect_to login_path, login_errors: user.errors
+    end
     redirect_to root_path
-
-
   end
+
+  # def create
+  #   # flash[:success] = request.env['omniauth.auth']
+  #   begin
+  #     oauthuser = User::OAuthUser.new(auth_hash, current_user)
+  #     oauthuser.first_or_create
+  #     @user = oauthuser.account.user
+  #     # self.current_user = @user
+  #     session[:user_id] = @user.id
+  #     flash[:success] = "Bem vindo, #{@user.name}!"
+  #   rescue
+  #     flash[:warning] = "Houve um erro ao tentar autenticá-lo... #{params[:message]}"
+  #   end
+  #   redirect_to root_path
+  # end
 
   def destroy
     if current_user
       session.delete(:user_id)
-      flash[:success] = 'See you!'
+      flash[:success] = 'Até logo!'
     end
     redirect_to root_path
+  end
+
+  protected
+  
+  def auth_hash
+    request.env["omniauth.auth"]
   end
 
   def auth_failure
@@ -54,3 +54,4 @@ class SessionsController < ApplicationController
   end
 
 end
+

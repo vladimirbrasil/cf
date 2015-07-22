@@ -1,0 +1,18 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uid: 1111111
+  provider: google
+  image_url: https://lh4.googleusercontent.com/-F6SEx2kFNpM/AAAAAAAAAAI/AAAAAAAAmZI/6nHieUDACyo/s48-c/photo.jpg?sz=50
+  oauth_token: 1111111
+  oauth_refresh_token: 1111111
+  oauth_expires: 2015-07-16 13:01:45
+
+two:
+  uid: 2222222
+  provider: google
+  image_url: MyString
+  oauth_token: 2222222
+  oauth_refresh_token: 2222222
+  oauth_expires: 2015-07-16 13:01:45
+

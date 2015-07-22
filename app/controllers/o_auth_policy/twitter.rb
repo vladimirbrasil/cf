@@ -1,4 +1,5 @@
-class TwitterPolicy
+class OAuthPolicy::Twitter < OAuthPolicy::Base
+  extend ActiveSupport::Concern
 
   def initialize auth
     @auth = auth

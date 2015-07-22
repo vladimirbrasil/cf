@@ -1,5 +1,6 @@
-class GooglePolicy < OAuthPolicy
-
+class OAuthPolicy::Google < OAuthPolicy::Base
+  extend ActiveSupport::Concern
+  
   def post_initialize auth
     @auth = auth
   end

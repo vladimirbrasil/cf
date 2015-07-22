@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bem vindo!</title>
+  <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <section class="intro">
+
+    
+    <div class="g-signin2 content" data-onsuccess="onSignIn">
+      <%# render "layouts/google_signin.html.erb" %>
+
+<!-- Adicione onde quer que seu botão de login seja exibido -->
+<!-- Adicionar scope de omniauth (provider google) -->
+<div id="signinButton">
+  <span class="g-signin"
+    data-scope=<%= "https://www.googleapis.com/auth/plus.login"  %>"
+    data-clientid="<%= ENV["GOOGLE_CLIENT_ID"] %>"
+    data-redirecturi="postmessage"
+    data-accesstype="offline"
+    data-cookiepolicy="single_host_origin"
+    data-callback="signInCallback">
+  </span>
+</div>
+<div id="result"></div>
+
+      <%# link_to "Login with Google", '/auth/google', { :class=>"hvr-fade" } %>
+      <%# link_to image_tag("google_signin.png", :alt => "Signin", size: '45x45', :align=> "middle"), '/auth/google' %>
+    </div>
+
+
+
+  </section>
+<!-- Última parte do elemento BODY no arquivo index.html -->
+<script type="text/javascript">
+jQuery(function() {
+  return $.ajax({
+    url: 'https://apis.google.com/js/client:plus.js?onload=gpAsyncInit',
+    dataType: 'script',
+    cache: true
+  });
+});
+
+window.gpAsyncInit = function() {
+  $('.googleplus-login').click(function(e) {
+    e.preventDefault();
+    gapi.auth.authorize({
+      immediate: true,
+      response_type: 'code',
+      cookie_policy: 'single_host_origin',
+      client_id: '<%=ENV["GOOGLE_CLIENT_ID"]%>.apps.googleusercontent.com',
+      scope: 'email profile'
+    }, function(response) {
+      if (response && !response.error) {
+        // google authentication succeed, now post data to server and handle data securely
+        jQuery.ajax({type: 'POST', url: "/auth/google/callback", dataType: 'json', data: response,
+          success: function(json) {
+            //change from ajax to $http.post to use controllers instead of opening json here
+            // response from server
+          }
+        });
+      } else {
+        // google authentication failed
+      }
+    });
+  });
+};</script>
+</body>
+</html>

@@ -1,29 +1,23 @@
-<% if current_user %>
-  <div class="page-header">
-    <h1>Here is some info about you...</h1>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-body">
-        <p><strong>First Name:</strong> <%= current_user.first_name %></p>
-        <p><strong>Last Name:</strong> <%= current_user.last_name %></p>
-        <p><strong>Email:</strong> <%= current_user.email %></p>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div class="page-header">
+      <h1>Algumas informações sobre você...</h1>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+          <p><strong>Name:</strong> <%= current_user.name %></p>
+          <p><strong>Email:</strong> <%= current_user.email %></p>
 
-        <% current_user.accounts.each do |account| %>
-          <h3><strong>Provider:</strong> <%= account.provider %></h3>
-          <ul>
-            <li><strong>uID:</strong> <%= account.uid %></li>
-            <li><strong>Location:</strong> <%= account.location %></li>
-            <li><strong>Avatar URL:</strong> <%= account.image_url %></li>
-            <li><strong>URL:</strong> <%= account.url %></li>
-            <li><strong>Token:</strong> <%= account.oauth_token[0,5] %>...</li>
-            <li><strong>Refresh Token:</strong> <%# account.oauth_refresh_token[0,5] %>...</li>
-            <li><strong>Secret:</strong> <%# account.oauth_secret[0,5] %>...</li>
-            <li><strong>Expires at:</strong> <%= account.oauth_expires %></li>
-          </ul>
-        <% end %>
+          <% current_user.accounts.each do |account| %>
+            <h3><strong>Provider:</strong> <%= account.provider %></h3>
+            <ul>
+              <li><strong>uID:</strong> <%= account.uid %></li>
+              <li><strong>Avatar URL:</strong> <%= account.image_url %></li>
+              <li><strong>Token:</strong> <%= account.oauth_token[0,5] %>...</li>
+              <li><strong>Refresh Token:</strong> <%# account.oauth_refresh_token[0,5] %>...</li>
+              <li><strong>Expires at:</strong> <%= account.oauth_expires %></li>
+            </ul>
+          <% end %>
 
+      </div>
     </div>
   </div>
-<% else %>
-  <%= render 'welcome' %>
-<% end %>

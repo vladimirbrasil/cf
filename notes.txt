@@ -1,0 +1,37 @@
+# http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
+
+=begin
+  Done << Adicionar token 
+  Fazer funcionar token_refresh.
+  Done << Adicionar email como index em user
+  Pode adicionar providers para o mesmo User
+    http://code.tutsplus.com/articles/how-to-use-omniauth-to-authenticate-your-users--net-22094
+    http://davidlesches.com/blog/clean-oauth-for-rails-an-object-oriented-approach
+  Refactor
+    http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/
+    Extract Value Objects
+      expired? Token expiration equalities...?
+    Extract Service Objects
+      authenticating with an access token
+        ex: pull a User#authenticate method out into a UserAuthenticator
+      posting to social networks | updating contacts in google (external sources)
+      action reaches multiple models an e-commerce purchase using Order, CreditCard and Customer objects
+      complex actions closing books after accounting period
+    Extract Form Objects
+    Extract Query Objects
+    Introduce View Objects
+    Extract Policy Objects
+    Extract Decorators
+  Adicionar novo login social:
+  1. Adiciona gem (Bundle install)
+    gem 'omniauth-linkedin-oauth2'
+  2. Adiciona provider (omniauth.rb)
+    provider :linkedin, ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET']
+  3. Cria aplicativo e respectiva callback /auth/linkedin/callback
+    linkedin.com/secure/developer | /auth/linkedin/callback | ...
+  4. Adiciona novo link (application.html.erb)
+    <li><%= link_to 'LinkedIn', '/auth/linkedin' %></li>
+  5. Adjust 'from_omniauth' que tenta 'generalizar' (user.rb)
+    para não usar if else para cada provider (Criar Ducktype??)
+    
+=end

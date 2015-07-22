@@ -1,4 +1,5 @@
-class OAuthPolicy
+class OAuthPolicy::Base
+  extend ActiveSupport::Concern
 
   def initialize auth
     @auth = auth
@@ -11,6 +12,10 @@ class OAuthPolicy
 
   def uid
     @auth['uid']
+  end
+
+  def name
+    "#{first_name} #{last_name}"
   end
 
   def first_name

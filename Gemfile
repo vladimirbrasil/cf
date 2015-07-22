@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
-# Use pg as the database for Active Record
+# Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -23,13 +23,13 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# App gems
 gem 'bootstrap-sass'
 gem 'omniauth-oauth2'
 gem "omniauth-google-oauth2"
 gem 'google-api-client', :require => 'google/api_client'
-# gem 'omniauth-twitter'
-# gem 'omniauth-facebook'
-# gem 'omniauth-linkedin-oauth2'
+
+gem 'virtus' #duvk type for models - signup creates account and user - quacks like activerecord model
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
